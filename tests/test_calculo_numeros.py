@@ -56,6 +56,31 @@ class TestCalculoNumeros(unittest.TestCase):
         with self.assertRaises(NumeroDebeSerPositivo):
             ingrese_numero()
             
+    @patch(  'builtins.input', return_value='AAA' )
+    def test_ingreso_letras(self, patch_input):
+        with self.assertRaises(ValueError):
+            ingrese_numero()
+        
+    @patch(  'builtins.input', return_value='ABC')
+    def test_ingreso_letras1(self, patch_input):
+        with self.assertRaises(ValueError):
+            ingrese_numero()
+
+    @patch(  'builtins.input', return_value='12AC')
+    def test_ingreso_letras2(self, patch_input):
+        with self.assertRaises(ValueError):
+            ingrese_numero()
+
+    @patch(  'builtins.input', return_value='123ABC')
+    def test_ingreso_letras3(self, patch_input):
+        with self.assertRaises(ValueError):
+            ingrese_numero()
+    
+    @patch(  'builtins.input', return_value='*#$')
+    def test_ingreso_letras4(self, patch_input):
+        with self.assertRaises(ValueError):
+            ingrese_numero()
+        
 
 if __name__ == '__main__':
     unittest.main() 
